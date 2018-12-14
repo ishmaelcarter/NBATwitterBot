@@ -1,9 +1,9 @@
 var Twit = require('twit')
 var T = new Twit({
-    consumer_key:         'f7kgByrtb2nqtWUSgRAaU7Kur',
-    consumer_secret:      'tu9QzGb2C1xwloWIDFqA1Dh3toFO4BFc0qOOO8q6tMfAdY7sdP',
-    access_token:         '1067520612820602882-2sCHP6qzJcKjhP1ANSAqw9FgwDytyP',
-    access_token_secret:  'pOhTfQ75M16yh17bZqw1gglvEb8MArK67Ke8QM0OlCErJ',
+    consumer_key:         process.env.CONSUMER_KEY,
+    consumer_secret:      process.env.CONSUMER_SECRET,
+    access_token:         process.env.ACCESS_TOKEN,
+    access_token_secret:  process.env.ACCESS_TOKEN_SECRET,
 })
 
 var users = ["23083404","35936474", "132389474", "50811932", "42562446", "2279776304", "159113258", "3184000707", "267425142", "317370751"];
