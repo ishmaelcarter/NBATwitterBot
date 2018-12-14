@@ -10,6 +10,7 @@ var users = ["23083404","35936474", "132389474", "50811932", "42562446", "227977
 var users = T.get('friends/ids', {screen_name: 'NBABot98011077'},function (err, data, response){
   console.log(data)
 })
+var users = users.ids
 // Lebron James, KD, John Wall, James Harden, Stephen Curry, Giannis, Anthony Davis, Jamal Murray, Damian Lillard, Kyrie Irving, Nick Young
 
 var stream = T.stream('statuses/filter', {follow: users});
