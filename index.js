@@ -9,8 +9,7 @@ var T = new Twit({
 var users = [];
 T.get('friends/ids', {screen_name: 'NBABot98011077'},function (err, data, response){
   if (err) {
-     users = ["23083404","35936474", "132389474", "50811932", "42562446", "2279776304", "159113258", "3184000707", "267425142", "317370751","2242915207"]
-  }
+  console.log(data)
   users = data.ids
 })
 
