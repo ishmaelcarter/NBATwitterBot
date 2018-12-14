@@ -25,6 +25,9 @@ T.get('friends/ids', {screen_name: 'NBABot98011077'},function (err, data, respon
 
     T.get('statuses/user_timeline', {user_id: element , count: 1}, function(err, data, response){
       console.log(data)
+      T.post('statuses/retweet/:id', {id: element.id}, function(err, data, response){
+        console.log(data)
+      })
     })
 
   })
