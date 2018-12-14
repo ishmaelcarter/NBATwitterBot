@@ -9,33 +9,31 @@ var T = new Twit({
 T.get('friends/ids', {screen_name: 'NBABot98011077'},function (err, data, response){
   console.log(data)
   var users = data
-  console.log(users)
+  users.ids.forEach(function(element) {
+    T.post('friendships/create', {user_id: element}, function (err, data, response){
+      console.log(data)
+    })
+
+    T.get('users/show', {user_id: element}, function(err, data, response) {
+      var user = data
+      console.log(data)
+      stream.on('tweet', function (tweet) {
+          if (users.indexOf(tweet.user.id_str) > -1) {
+              console.log(tweet.user.name + ": " + tweet.text);
+              T.post('statuses/retweet/:id', { id: tweet.id_str }, function (err, data, response) {
+                  console.log(data)
+              })
+          }
+      })
+        T.post('statuses/update', {status: 'Now following' + ' ' + '@' + user.screen_name}, function(err, data, response) {
+          console.log(data)
+        })
+    })
+
+    T.get('statuses/user_timeline', {user_id: element , count: 1}, function(err, data, response){
+      console.log(data)
+    })
+
+  })
 })
 // Lebron James, KD, John Wall, James Harden, Stephen Curry, Giannis, Anthony Davis, Jamal Murray, Damian Lillard, Kyrie Irving, Nick Young
-
-users.ids.forEach(function(element) {
-  T.post('friendships/create', {user_id: element}, function (err, data, response){
-    console.log(data)
-  })
-
-  T.get('users/show', {user_id: element}, function(err, data, response) {
-    var user = data
-    console.log(data)
-    stream.on('tweet', function (tweet) {
-        if (users.indexOf(tweet.user.id_str) > -1) {
-            console.log(tweet.user.name + ": " + tweet.text);
-            T.post('statuses/retweet/:id', { id: tweet.id_str }, function (err, data, response) {
-                console.log(data)
-            })
-        }
-    })
-      T.post('statuses/update', {status: 'Now following' + ' ' + '@' + user.screen_name}, function(err, data, response) {
-        console.log(data)
-      })
-  })
-
-  T.get('statuses/user_timeline', {user_id: element , count: 1}, function(err, data, response){
-    console.log(data)
-  })
-
-})
