@@ -15,14 +15,6 @@ T.get('friends/ids', {screen_name: 'NBABot98011077'},function (err, data, respon
       console.log(data)
     })
 
-    T.get('users/show', {user_id: element}, function(err, data, response) {
-      var user = data
-      console.log(data)
-        T.post('statuses/update', {status: 'Now following' + ' ' + '@' + user.screen_name}, function(err, data, response) {
-          console.log(data)
-        })
-    })
-
     T.get('statuses/user_timeline', {user_id: element , count: 1}, function(err, data, response){
       console.log(data)
       T.post('statuses/retweet/:id', {id: element.id}, function(err, data, response){
