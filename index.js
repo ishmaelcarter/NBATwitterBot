@@ -9,6 +9,7 @@ var T = new Twit({
 T.get('friends/ids', {screen_name: 'NBABot98011077'},function (err, data, response){
   console.log(data)
   var users = data
+  console.log(users);
   users.ids.forEach(function(element) {
     T.post('friendships/create', {user_id: element}, function (err, data, response){
       console.log(data)
