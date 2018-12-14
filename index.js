@@ -6,8 +6,8 @@ var T = new Twit({
     access_token_secret:  process.env.ACCESS_TOKEN_SECRET,
 })
 
-var users = ["23083404","35936474", "132389474", "50811932", "42562446", "2279776304", "159113258", "3184000707", "267425142", "317370751"];
-// Lebron James, KD, John Wall, James Harden, Stephen Curry, Giannis, Anthony Davis, Jamal Murray, Damian Lillard, Kyrie Irving
+var users = ["23083404","35936474", "132389474", "50811932", "42562446", "2279776304", "159113258", "3184000707", "267425142", "317370751","2242915207"];
+// Lebron James, KD, John Wall, James Harden, Stephen Curry, Giannis, Anthony Davis, Jamal Murray, Damian Lillard, Kyrie Irving, Nick Young
 
 var stream = T.stream('statuses/filter', {follow: users});
 
