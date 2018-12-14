@@ -6,13 +6,12 @@ var T = new Twit({
     access_token_secret:  process.env.ACCESS_TOKEN_SECRET,
 })
 
-var users = [];
 T.get('friends/ids', {screen_name: 'NBABot98011077'},function (err, data, response){
   console.log(data)
-  users = data
+  var users = data
 })
 // Lebron James, KD, John Wall, James Harden, Stephen Curry, Giannis, Anthony Davis, Jamal Murray, Damian Lillard, Kyrie Irving, Nick Young
-
+console.log(users);
 var stream = T.stream('statuses/filter', {follow: users});
 
 users.ids.forEach(function(element) {
