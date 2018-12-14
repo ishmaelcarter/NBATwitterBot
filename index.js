@@ -7,7 +7,7 @@ var T = new Twit({
 })
 
 var users = ["23083404","35936474", "132389474", "50811932", "42562446", "2279776304", "159113258", "3184000707", "267425142", "317370751","2242915207"];
-var users = T.get('friends/ids', function (err, data, response){
+var users = T.get('friends/ids', {screen_name: 'NBABot98011077'},function (err, data, response){
   console.log(data)
 })
 // Lebron James, KD, John Wall, James Harden, Stephen Curry, Giannis, Anthony Davis, Jamal Murray, Damian Lillard, Kyrie Irving, Nick Young
