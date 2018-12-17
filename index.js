@@ -12,11 +12,24 @@ T.get('friends/ids', {screen_name: 'NBABot98011077'},function (err, data, respon
   users.ids.forEach(function(element) {
     console.log(element);
     T.get('statuses/user_timeline', {user_id: element , count: 1}, function(err, data, response){
-      console.log(data[0])
+      time = data[0].created_at
+      time = time.substr(11, 8)
+      screen_name = data[0].user.screen_name
       retweet = data[0].id_str
-      T.post('statuses/retweet/:id', {id: retweet}, function(err, data, response){
-        console.log(data);
-      })
+      retweeted = data[0].retweeted
+      console.log(screen_name);
+      if (time > "22:00:00") {
+        if (!retweeted) {
+
+          } else {
+            T.post('statuses/retweet/:id', {id: retweet}, function(err, data, response){
+              console.log(data);
+            })
+            T.post('statuses/update', { status: "@" + screen_name + " " + "is on Twitter late!" }, function(err, data, response) {
+              console.log(data)
+            })
+          }
+        }
     })
 
   })
