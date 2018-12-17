@@ -34,4 +34,3 @@ T.get('friends/ids', {screen_name: 'NBAatNight'},function (err, data, response){
 
   })
 })
-// Lebron James, KD, John Wall, James Harden, Stephen Curry, Giannis, Anthony Davis, Jamal Murray, Damian Lillard, Kyrie Irving, Nick Young
