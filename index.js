@@ -19,7 +19,7 @@ T.get('friends/ids', {screen_name: 'NBABot98011077'},function (err, data, respon
       retweeted = data[0].retweeted
       console.log(screen_name);
       if (time > "22:00:00") {
-        if (!retweeted) {
+        if (retweeted) {
 
           } else {
             T.post('statuses/retweet/:id', {id: retweet}, function(err, data, response){
