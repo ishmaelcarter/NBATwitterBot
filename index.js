@@ -6,7 +6,7 @@ var T = new Twit({
     access_token_secret:  process.env.ACCESS_TOKEN_SECRET,
 })
 
-T.get('friends/ids', {screen_name: 'NBABot98011077'},function (err, data, response){
+T.get('friends/ids', {screen_name: 'NBAatNight'},function (err, data, response){
   console.log(data)
   var users = data
   users.ids.forEach(function(element) {
