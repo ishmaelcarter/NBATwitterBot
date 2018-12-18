@@ -24,9 +24,9 @@ T.get('friends/ids', {screen_name: 'NBAatNight'},function (err, data, response){
           } else {
             T.post('statuses/retweet/:id', {id: retweet}, function(err, data, response){
               console.log(data);
-            })
-            T.post('statuses/update', { status: "@" + screen_name + " " + "was on Twitter late again recently" }, function(err, data, response) {
-              console.log(data)
+              T.post('statuses/update', { status: "@" + screen_name + " " + "was on Twitter late again recently" }, function(err, data, response) {
+                console.log(data)
+              })
             })
           }
         }
