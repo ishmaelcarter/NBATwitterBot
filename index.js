@@ -14,11 +14,12 @@ T.get('friends/ids', {screen_name: 'NBAatNight'},function (err, data, response){
     T.get('statuses/user_timeline', {user_id: element , count: 1}, function(err, data, response){
       time = data[0].created_at
       hour = time.substr(11, 2)
+      hour = parseInt(hour)
       screen_name = data[0].user.screen_name
       retweet = data[0].id_str
       retweeted = data[0].retweeted
       console.log(screen_name)
-      if (hour > "22" || hour < "02") {
+      if (hour > 22 || hour < 03) {
         if (retweeted) {
 
           } else {
