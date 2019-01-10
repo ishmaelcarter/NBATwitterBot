@@ -26,7 +26,7 @@ T.get('friends/ids', {screen_name: 'NBAatNight'},function (err, data, response){
             T.post('statuses/retweet/:id', {id: retweet}, function(err, data, response){
               console.log(data)
             })
-            messages = ["was on Twitter late again last night", "may not be well rested today", "needs to take a break from the late tweets", "might be tired today"]
+            messages = ["was on Twitter late again last night", "may not be well rested today", "needs to take a break from the late tweets", "might be tired today", "get to bed a bit earlier"]
             message = messages[Math.floor(Math.random()*messages.length)];
             T.post('statuses/update', { status: "@" + screen_name + " " + message }, function(err, data, response) {
               console.log(data)
