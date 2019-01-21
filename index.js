@@ -18,7 +18,7 @@ T.get('friends/ids', {screen_name: 'NBAatNight'},function (err, data, response){
       user = data[0].name
       retweet = data[0].id_str
       retweeted = data[0].retweeted
-      console.log(name)
+      console.log(user)
       if (hour > 22 || hour < 03) {
         if (retweeted) {
 
