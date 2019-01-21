@@ -15,7 +15,7 @@ T.get('friends/ids', {screen_name: 'NBAatNight'},function (err, data, response){
       time = data[0].created_at
       hour = time.substr(11, 2)
       hour = parseInt(hour)
-      name = data[0].name
+      user = data[0].name
       retweet = data[0].id_str
       retweeted = data[0].retweeted
       console.log(name)
