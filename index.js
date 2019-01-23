@@ -21,7 +21,7 @@ T.get('friends/ids', {screen_name: 'NBAatNight'},function (err, data, response){
       console.log(user)
       if (hour > 22 || hour < 03) {
         if (retweeted) {
-
+          console.log("No new tweets to see")
           } else {
             T.post('statuses/retweet/:id', {id: retweet}, function(err, data, response){
               console.log(data)
