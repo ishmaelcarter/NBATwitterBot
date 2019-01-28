@@ -12,7 +12,7 @@ T.get('friends/ids', {screen_name: 'NBAatNight'},function (err, data, response){
   users.ids.forEach(function(element) {
     console.log(element);
     T.get('statuses/user_timeline', {user_id: element , count: 1}, function(err, data, response){
-      time = data[0].created_at
+      time = data[0].status.created_at
       hour = time.substr(11, 2)
       hour = parseInt(hour)
       user = data[0].user.name
