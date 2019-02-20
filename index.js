@@ -18,7 +18,7 @@ T.get('friends/ids', {screen_name: 'NBAatNight'},function (err, data, response){
       day_1 = created_1.substr(0,10)
       day_2 = created_2.substr(0,10)
       day_3 = created_3.substr(0,10)
-      hour = created.substr(11, 2)
+      hour = created_1.substr(11, 2)
       hour = parseInt(hour)
       user = data[0].user.name
       retweet = data[0].id_str
