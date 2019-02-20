@@ -34,7 +34,6 @@ T.get('friends/ids', {screen_name: 'NBAatNight'},function (err, data, response){
             T.post('statuses/update', { status: user + " " + message , function(err, data, response) {
               console.log(user)
             })
-          }
     })
 
   })
