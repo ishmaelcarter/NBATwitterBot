@@ -33,8 +33,9 @@ T.get('friends/ids', {screen_name: 'NBAatNight'},function (err, data, response){
             message = messages[Math.floor(Math.random()*messages.length)];
             T.post('statuses/update', { status: user + " " + message , function(err, data, response) {
               console.log(user)
-            })
+            }
+       })
+      }
     })
-
   })
 })
