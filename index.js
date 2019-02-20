@@ -28,7 +28,7 @@ T.get('friends/ids', {screen_name: 'NBAatNight'},function (err, data, response){
         if (retweeted) {
           console.log("No new tweets to see")
           }
-        else if (day_1 == day_2) {
+        else if (day_1 == day_2 || day_2 == day_3) {
             messages = ["was on Twitter a lot yesterday", "was active on Twitter yesterday", "may not be well rested today", "needs to take a break from tweeting", "might be tired today", "get off of twitter a bit earlier", "has tweeted a lot this week"]
             message = messages[Math.floor(Math.random()*messages.length)];
             T.post('statuses/update', { status: user + " " + message , function(err, data, response) {
