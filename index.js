@@ -14,15 +14,13 @@ T.get('friends/ids', {screen_name: 'NBAatNight'},function (err, data, response){
     T.get('statuses/user_timeline', {user_id: element , count: 3}, function(err, data, response){
       if (data[0]) {
         created = []
-        created.push(data[0].created_at)
-        created.push(data[1].created_at)
-        created.push(data[2].created_at)
+        for (var i = 0; i < 3; i++) {
+          created.push(data[i].created_at)
+        }
         day = []
-        day.push(created[0].substr(0,10))
-        day.push(created[1].substr(0,10))
-        day.push(created[2].substr(0,10))
-        hour = created[0].substr(11, 2)
-        hour = parseInt(hour)
+        for (var i = 0; i < 3; i++) {
+          day.push(created[i].substr(0,10))
+        }
         user = data[0].user.name
         retweet = data[0].id_str
         retweets = data[0].retweet_count
