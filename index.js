@@ -29,13 +29,13 @@ T.get('friends/ids', {screen_name: 'NBAatNight'},function (err, data, response){
           if (retweeted) {
             console.log("No new tweets to see")
             }
-          else if (day[0] == day[1] || day[1] == day[2]) {
+          else if (day[0] == day[1] && day[1] == day[2]) {
             T.post('statuses/retweet/:id', {id: retweet}, function(err, data, response){
                 console.log(data)
             })
             messages = ["was on Twitter a lot on", "was active on Twitter during", "needs to take a break from tweeting after", "might be tired", "tweeted multiple times on", "has tweeted a lot this week","has been very active since"]
             message = messages[Math.floor(Math.random()*messages.length)];
-            T.post('statuses/update', { status: user + " " + message + " " + day[0], function(err, data, response) {
+            T.post('statuses/update', { status: user + " " + message + " " + day[1], function(err, data, response) {
               console.log(user)
             }
          })
