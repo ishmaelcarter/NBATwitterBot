@@ -13,13 +13,13 @@ T.get('friends/ids', {screen_name: 'NBAatNight'},function (err, data, response){
     console.log(element);
     T.get('statuses/user_timeline', {user_id: element , count: 3}, function(err, data, response){
       if (data[0]) {
-        created_1 = data[0].created_at
-        created_2 = data[1].created_at
-        created_3 = data[2].created_at
-        day_1 = created_1.substr(0,10)
-        day_2 = created_2.substr(0,10)
-        day_3 = created_3.substr(0,10)
-        hour = created_1.substr(11, 2)
+        created[0] = data[0].created_at
+        created[1] = data[1].created_at
+        created[2] = data[2].created_at
+        day[0] = created[0].substr(0,10)
+        day[1] = created[1].substr(0,10)
+        day[2] = created[2].substr(0,10)
+        hour = created[0].substr(11, 2)
         hour = parseInt(hour)
         user = data[0].user.name
         retweet = data[0].id_str
@@ -29,7 +29,7 @@ T.get('friends/ids', {screen_name: 'NBAatNight'},function (err, data, response){
           if (retweeted) {
             console.log("No new tweets to see")
             }
-          else if (day_1 == day_2 || day_2 == day_3) {
+          else if (day[0] == day[1] || day[1] == day[2]) {
             T.post('statuses/retweet/:id', {id: retweet}, function(err, data, response){
                 console.log(data)
             })
