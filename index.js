@@ -6,6 +6,41 @@ var T = new Twit({
     access_token_secret:  process.env.ACCESS_TOKEN_SECRET,
 })
 
+T.get('trends/place', {id: 1}, function (err, data, response){
+  var top_trends = []
+  for (i=0;i<11;i++) {
+    top_trends.push(data[0].trends[i].name)
+  }
+  console.log(top_trends);
+  top_trends.forEach(function(element) {
+    T.post('statuses/update', { status: element + " is trending today"}, function(err, data, response) {
+      console.log(element)
+    })
+    T.get('search/tweets', {q: element, count: 10}, function (err,data,response){
+     if (data) {
+        for (var i = 0; i < 10; i++) {
+          if (data.statuses[i]) {
+            tweet = data
+            retweeted = data.statuses[i].retweeted
+            var retweets = data.statuses[i].retweet_count
+            var favs = data.statuses[i].favorite_count
+            console.log(retweets)
+            console.log(favs);
+            if (retweets > 1000 || favs > 5000) {
+              if (!retweeted) {
+                console.log(tweet.statuses[i].id_str);
+                T.post('statuses/retweet/:id', {id: tweet.statuses[i].id_str}, function(err, data, response){
+                  console.log(data)
+                })
+              }
+            }
+          }
+        }
+      }
+    })
+  })
+})
+/*
 T.get('friends/ids', {screen_name: 'NBAatNight'},function (err, data, response){
   console.log(data)
   var users = data
@@ -44,3 +79,4 @@ T.get('friends/ids', {screen_name: 'NBAatNight'},function (err, data, response){
     })
   })
 })
+*/
