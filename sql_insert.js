@@ -13,7 +13,7 @@ var T = new Twit({
     access_token:         process.env.ACCESS_TOKEN,
     access_token_secret:  process.env.ACCESS_TOKEN_SECRET,
 })
-
+db_insert(T, con);
 function db_insert(T, con) {
   T.get('trends/place', {id: 1}, function (err, data, response){
     var top_trends = []
