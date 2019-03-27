@@ -1,3 +1,4 @@
+
 var mysql = require('mysql');
 var con = mysql.createConnection({
   host: process.env.HOST,
@@ -30,9 +31,11 @@ function db_insert(T, con) {
               lang = data.statuses[i].lang
               text = data.statuses[i].text
               text = text.substring(text.indexOf(":")+1)
+              time = data.statuses[i].created_at
               if (lang == "en") {
-                var query = "INSERT INTO tweets (text) VALUES (?)"
-                con.query(query, text, function(err, rows, fields) {
+                var query = "INSERT INTO tweets (text, time) VALUES (?, ?)"
+                var values = [text, time]
+                con.query(query, values, function(err, rows, fields) {
                   console.log(err);
                 });
                 console.log("Insert Complete");
