@@ -21,17 +21,20 @@ T.get('trends/place', {id: 1}, function (err, data, response){
         for (var i = 0; i < 10; i++) {
           if (data.statuses[i]) {
             tweet = data
+            lang = data.statuses[i].lang
             retweeted = data.statuses[i].retweeted
             var retweets = data.statuses[i].retweet_count
             var favs = data.statuses[i].favorite_count
             console.log(retweets)
             console.log(favs);
-            if (retweets > 1000 || favs > 5000) {
-              if (!retweeted) {
-                console.log(tweet.statuses[i].id_str);
-                T.post('statuses/retweet/:id', {id: tweet.statuses[i].id_str}, function(err, data, response){
-                  console.log(data)
-                })
+            if (lang == 'en') {
+              if (retweets > 1000 || favs > 5000) {
+                if (!retweeted) {
+                  console.log(tweet.statuses[i].id_str);
+                  T.post('statuses/retweet/:id', {id: tweet.statuses[i].id_str}, function(err, data, response){
+                    console.log(data)
+                  })
+                }
               }
             }
           }
