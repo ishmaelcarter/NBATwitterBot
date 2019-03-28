@@ -38,13 +38,15 @@ function db_insert(T, con) {
               time = data.statuses[i].created_at
               retweets = data.statuses[i].retweet_count
               favs = data.statuses[i].favorite_count
-              if (lang == "en") {
-                var query = "INSERT INTO tweets (text, time, retweets, favs) VALUES (?, ?, ?, ?)"
-                var values = [text, time, retweets, favs]
-                con.query(query, values, function(err, rows, fields) {
-                  console.log(err);
-                });
-                console.log("Insert Complete");
+              if (retweets > 1000 || favs > 5000) {
+                if (lang == "en") {
+                  var query = "INSERT INTO tweets (text, time, retweets, favs) VALUES (?, ?, ?, ?)"
+                  var values = [text, time, retweets, favs]
+                  con.query(query, values, function(err, rows, fields) {
+                    console.log(err);
+                  });
+                  console.log("Insert Complete");
+                }
               }
               retweeted = data.statuses[i].retweeted
               retweets = data.statuses[i].retweet_count
