@@ -1,4 +1,3 @@
-
 var mysql = require('mysql');
 var con = mysql.createConnection({
   host: process.env.HOST,
@@ -14,6 +13,8 @@ var T = new Twit({
     access_token:         process.env.ACCESS_TOKEN,
     access_token_secret:  process.env.ACCESS_TOKEN_SECRET,
 })
+
+
 
 db_insert(T, con);
 function db_insert(T, con) {
@@ -31,10 +32,14 @@ function db_insert(T, con) {
        if (data) {
           for (var i = 0; i < 10; i++) {
             if (data.statuses[i]) {
-              if (data.statuses[i].extended_entities.media[0].media_url_https) {
-                media_url = data.statuses[i].extended_entities.media[0].media_url_https
-              } else {
-                media_url = NULL
+              if (typeof data.statuses[i].entities.media !== "undefined") {
+                console.log(data.statuses[i].entities.media)
+                if (typeof data.statuses[i].entities.media[0].media_url != "undefined") {
+                  media_url = data.statuses[i].entities.media[0].media_url_https
+                  console.log(media_url)
+                } else {
+                  media_url = "NULL"
+                }
               }
               lang = data.statuses[i].lang
               text = data.statuses[i].text
