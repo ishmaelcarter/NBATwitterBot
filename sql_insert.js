@@ -19,7 +19,7 @@ db_insert(T, con);
 function db_insert(T, con) {
   T.get('trends/place', {id: 23424977}, function (err, data, response){
     var top_trends = []
-    for (i=0;i<data[0].trends.length();i++) {
+    for (i=0;i<data[0].trends.length;i++) {
       volume = data[0].trends[i].tweet_volume
       if (volume > 10000) {
         top_trends.push(data[0].trends[i].name)
