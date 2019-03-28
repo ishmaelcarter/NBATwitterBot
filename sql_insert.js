@@ -31,7 +31,11 @@ function db_insert(T, con) {
        if (data) {
           for (var i = 0; i < 10; i++) {
             if (data.statuses[i]) {
-              tweet = data
+              if (data.statuses[i].extended_entities.media[0].media_url_https) {
+                media_url = data.statuses[i].extended_entities.media[0].media_url_https
+              } else {
+                media_url = NULL
+              }
               lang = data.statuses[i].lang
               text = data.statuses[i].text
               text = text.substring(text.indexOf(":")+1)
@@ -40,8 +44,8 @@ function db_insert(T, con) {
               favs = data.statuses[i].favorite_count
               if (retweets > 1000 || favs > 5000) {
                 if (lang == "en") {
-                  var query = "INSERT INTO tweets (text, time, retweets, favs) VALUES (?, ?, ?, ?)"
-                  var values = [text, time, retweets, favs]
+                  var query = "INSERT INTO tweets (text, time, retweets, favs, media) VALUES (?, ?, ?, ?, ?)"
+                  var values = [text, time, retweets, favs, media_url]
                   con.query(query, values, function(err, rows, fields) {
                     console.log(err);
                   });
