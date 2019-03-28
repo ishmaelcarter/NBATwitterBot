@@ -6,10 +6,13 @@ var T = new Twit({
     access_token_secret:  process.env.ACCESS_TOKEN_SECRET,
 })
 
-T.get('trends/place', {id: 1}, function (err, data, response){
+T.get('trends/place', {id: 23424977}, function (err, data, response){
   var top_trends = []
-  for (i=0;i<11;i++) {
-    top_trends.push(data[0].trends[i].name)
+  for (i=0;i<data[0].trends.length;i++) {
+    volume = data[0].trends[i].tweet_volume
+    if (volume > 10000) {
+      top_trends.push(data[0].trends[i].name)
+    }
   }
   console.log(top_trends);
   top_trends.forEach(function(element) {
