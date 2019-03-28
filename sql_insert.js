@@ -14,9 +14,10 @@ var T = new Twit({
     access_token:         process.env.ACCESS_TOKEN,
     access_token_secret:  process.env.ACCESS_TOKEN_SECRET,
 })
+
 db_insert(T, con);
 function db_insert(T, con) {
-  T.get('trends/place', {id: 1}, function (err, data, response){
+  T.get('trends/place', {id: 23424977}, function (err, data, response){
     var top_trends = []
     for (i=0;i<11;i++) {
       top_trends.push(data[0].trends[i].name)
@@ -32,17 +33,19 @@ function db_insert(T, con) {
               text = data.statuses[i].text
               text = text.substring(text.indexOf(":")+1)
               time = data.statuses[i].created_at
+              retweets = data.statuses[i].retweet_count
+              favs = data.statuses[i].favorite_count
               if (lang == "en") {
-                var query = "INSERT INTO tweets (text, time) VALUES (?, ?)"
-                var values = [text, time]
+                var query = "INSERT INTO tweets (text, time, retweets, favs) VALUES (?, ?, ?, ?)"
+                var values = [text, time, retweets, favs]
                 con.query(query, values, function(err, rows, fields) {
                   console.log(err);
                 });
                 console.log("Insert Complete");
               }
               retweeted = data.statuses[i].retweeted
-              var retweets = data.statuses[i].retweet_count
-              var favs = data.statuses[i].favorite_count
+              retweets = data.statuses[i].retweet_count
+              favs = data.statuses[i].favorite_count
               console.log(retweets)
               console.log(favs);
             }
