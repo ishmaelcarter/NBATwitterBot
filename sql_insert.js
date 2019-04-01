@@ -35,6 +35,7 @@ function db_insert(T, con) {
               if (typeof data.statuses[i].entities.media !== "undefined") {
                 console.log(data.statuses[i].entities.media)
                 if (typeof data.statuses[i].entities.media[0].media_url != "undefined") {
+                  url = data.statuses[i].entities.media[0].url
                   media_url = data.statuses[i].entities.media[0].media_url_https
                   console.log(media_url)
                 } else {
@@ -49,7 +50,7 @@ function db_insert(T, con) {
               favs = data.statuses[i].favorite_count
               if (retweets > 1000 || favs > 5000) {
                 if (lang == "en") {
-                  var query = "INSERT INTO tweets (text, time, retweets, favs, media) VALUES (?, ?, ?, ?, ?)"
+                  var query = "INSERT INTO tweets (text, time, retweets, favs, media, url) VALUES (?, ?, ?, ?, ?, ?)"
                   var values = [text, time, retweets, favs, media_url]
                   con.query(query, values, function(err, rows, fields) {
                     console.log(err);
