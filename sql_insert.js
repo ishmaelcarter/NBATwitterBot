@@ -38,7 +38,9 @@ function db_insert(T, con) {
                   url = data.statuses[i].entities.media[0].url
                   media_url = data.statuses[i].entities.media[0].media_url_https
                   console.log(media_url)
+                  console.log(url)
                 } else {
+                  console.log("In Else");
                   media_url = "NULL"
                   url = "NULL"
                 }
