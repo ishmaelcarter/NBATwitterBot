@@ -40,6 +40,7 @@ function db_insert(T, con) {
                   console.log(media_url)
                 } else {
                   media_url = "NULL"
+                  url = "NULL"
                 }
               }
               lang = data.statuses[i].lang
