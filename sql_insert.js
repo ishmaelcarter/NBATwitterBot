@@ -30,7 +30,7 @@ function db_insert(T, con) {
     top_trends.forEach(function(element) {
       T.get('search/tweets', {q: element, count: 20}, function (err,data,response){
        if (data) {
-          for (var i = 0; i < 10; i++) {
+          for (var i = 0; i < 20; i++) {
             if (data.statuses[i]) {
               if (typeof data.statuses[i].entities.media !== "undefined") {
                 console.log(data.statuses[i].entities.media)
