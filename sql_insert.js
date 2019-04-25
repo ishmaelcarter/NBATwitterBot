@@ -22,13 +22,13 @@ function db_insert(T, con) {
     var top_trends = []
     for (i=0;i<data[0].trends.length;i++) {
       volume = data[0].trends[i].tweet_volume
-      if (volume > 10000) {
+      if (volume > 5000) {
         top_trends.push(data[0].trends[i].name)
       }
     }
     console.log(top_trends);
     top_trends.forEach(function(element) {
-      T.get('search/tweets', {q: element, count: 10}, function (err,data,response){
+      T.get('search/tweets', {q: element, count: 20}, function (err,data,response){
        if (data) {
           for (var i = 0; i < 10; i++) {
             if (data.statuses[i]) {
@@ -46,8 +46,8 @@ function db_insert(T, con) {
                 }
               }
               lang = data.statuses[i].lang
-              text = data.statuses[i].text
-              text = text.substring(text.indexOf(":")+1)
+              const text = data.statuses[i].text
+              const text = text.substring(text.indexOf(":")+1)
               time = data.statuses[i].created_at
               retweets = data.statuses[i].retweet_count
               favs = data.statuses[i].favorite_count
