@@ -51,7 +51,7 @@ function db_insert(T, con) {
               time = data.statuses[i].created_at
               retweets = data.statuses[i].retweet_count
               favs = data.statuses[i].favorite_count
-              if (retweets > 1000 || favs > 5000) {
+              if (retweets > 5000 || favs > 5000) {
                 if (lang == "en") {
                   if (media_url.includes("video_thumb") != true) {
                     var query = "INSERT INTO tweets (text, time, retweets, favs, media, url) VALUES (?, ?, ?, ?, ?, ?)"
