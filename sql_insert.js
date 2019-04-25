@@ -22,7 +22,7 @@ function db_insert(T, con) {
     var top_trends = []
     for (i=0;i<data[0].trends.length;i++) {
       volume = data[0].trends[i].tweet_volume
-      if (volume > 5000) {
+      if (volume > 10000) {
         top_trends.push(data[0].trends[i].name)
       }
     }
