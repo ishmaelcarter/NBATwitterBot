@@ -46,8 +46,8 @@ function db_insert(T, con) {
                 }
               }
               lang = data.statuses[i].lang
-              const text = data.statuses[i].text
-              const text = text.substring(text.indexOf(":")+1)
+              let text = data.statuses[i].text
+              text = text.substring(text.indexOf(":")+1)
               time = data.statuses[i].created_at
               retweets = data.statuses[i].retweet_count
               favs = data.statuses[i].favorite_count
