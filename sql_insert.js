@@ -63,9 +63,6 @@ function db_insert(T, con) {
                   }
                 }
               }
-              retweeted = data.statuses[i].retweeted
-              retweets = data.statuses[i].retweet_count
-              favs = data.statuses[i].favorite_count
               console.log(retweets)
               console.log(favs);
             }
