@@ -36,8 +36,8 @@ function db_insert(T, con) {
               if (typeof data.statuses[i].entities.media !== "undefined") {
                 console.log(data.statuses[i].entities.media)
                 if (typeof data.statuses[i].entities.media[0].media_url != "undefined") {
-                  const url = data.statuses[i].entities.media[0].url
-                  const media_url = data.statuses[i].entities.media[0].media_url_https
+                  url = data.statuses[i].entities.media[0].url
+                  media_url = data.statuses[i].entities.media[0].media_url_https
                   console.log(media_url)
                   console.log(url)
                 } else {
