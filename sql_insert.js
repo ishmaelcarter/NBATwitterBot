@@ -50,8 +50,13 @@ function db_insert(T, con) {
               var text = data.statuses[i].text
               text = text.substring(text.indexOf(":")+1)
               var time = data.statuses[i].created_at
-              var retweets = data.statuses[i].retweeted_status.retweet_count
-              var favs = data.statuses[i].retweeted_status.favorite_count
+              if (data.statuses[i].retweeted_status) {
+                var retweets = data.statuses[i].retweeted_status.retweet_count
+                var favs = data.statuses[i].retweeted_status.favorite_count
+              } else {
+                var retweets = 0
+                var favs = 0
+              }
               if (retweets > 2500 || favs > 5000) {
                 if (lang == "en") {
                   if (media_url.includes("video_thumb") != true) {
