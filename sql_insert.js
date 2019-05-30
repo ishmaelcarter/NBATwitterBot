@@ -35,8 +35,8 @@ function db_insert(T, con) {
               if (typeof data.statuses[i].entities.media !== "undefined") {
                 console.log(data.statuses[i].entities.media)
                 if (typeof data.statuses[i].entities.media[0].media_url != "undefined") {
-                  url = data.statuses[i].entities.media[0].url
-                  media_url = data.statuses[i].entities.media[0].media_url_https
+                  var url = data.statuses[i].entities.media[0].url
+                  var media_url = data.statuses[i].entities.media[0].media_url_https
                   console.log(media_url)
                   console.log(url)
                 } else {
@@ -45,12 +45,12 @@ function db_insert(T, con) {
                   url = "NULL"
                 }
               }
-              lang = data.statuses[i].lang
-              let text = data.statuses[i].text
+              var lang = data.statuses[i].lang
+              var text = data.statuses[i].text
               text = text.substring(text.indexOf(":")+1)
-              time = data.statuses[i].created_at
-              retweets = data.statuses[i].retweet_count
-              favs = data.statuses[i].favorite_count
+              var time = data.statuses[i].created_at
+              var retweets = data.statuses[i].retweet_count
+              var favs = data.statuses[i].favorite_count
               if (retweets > 2500 || favs > 5000) {
                 if (lang == "en") {
                   if (media_url.includes("video_thumb") != true) {
