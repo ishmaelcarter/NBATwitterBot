@@ -33,19 +33,6 @@ function db_insert(T, con) {
          var length = data.statuses.length
           for (var i = 0; i < length; i++) {
             if (data.statuses[i]) {
-              if (typeof data.statuses[i].entities.media !== "undefined") {
-                console.log(data.statuses[i].entities.media)
-                if (typeof data.statuses[i].entities.media[0].media_url != "undefined") {
-                  url = data.statuses[i].entities.media[0].url
-                  media_url = data.statuses[i].entities.media[0].media_url_https
-                  console.log(media_url)
-                  console.log(url)
-                } else {
-                  console.log("In Else");
-                  media_url = "NULL"
-                  url = "NULL"
-                }
-              }
               var lang = data.statuses[i].lang
               var text = data.statuses[i].text
               text = text.substring(text.indexOf(":")+1)
@@ -57,6 +44,19 @@ function db_insert(T, con) {
                 var retweets = 0
                 var favs = 0
               }
+              if (typeof data.statuses[i].entities.media !== "undefined") {
+                console.log(data.statuses[i].entities.media)
+                media_url = NULL
+                url = NULL
+                if (typeof data.statuses[i].entities.media[0].media_url != "undefined") {
+                  url = data.statuses[i].entities.media[0].url
+                  media_url = data.statuses[i].entities.media[0].media_url_https
+                  console.log(media_url)
+                  console.log(url)
+                }
+              }
+              
+            
               if (retweets > 2500 || favs > 5000) {
                 if (lang == "en") {
                   if (media_url.includes("video_thumb") != true) {
