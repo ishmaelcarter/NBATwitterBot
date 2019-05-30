@@ -30,7 +30,7 @@ function db_insert(T, con) {
     top_trends.forEach(function(element) {
       T.get('search/tweets', {q: element, count: 100}, function (err,data,response){
        if (data) {
-          for (var i = 0; i < 100; i++) {
+          for (var i = 0; i < data.statuses.length; i++) {
             if (data.statuses[i]) {
               if (typeof data.statuses[i].entities.media !== "undefined") {
                 console.log(data.statuses[i].entities.media)
@@ -49,8 +49,8 @@ function db_insert(T, con) {
               var text = data.statuses[i].text
               text = text.substring(text.indexOf(":")+1)
               var time = data.statuses[i].created_at
-              var retweets = data.statuses[i].retweet_count
-              var favs = data.statuses[i].favorite_count
+              var retweets = data.statuses[i].retweeted_status.retweet_count
+              var favs = data.statuses[i].retweeted_status.favorite_count
               if (retweets > 2500 || favs > 5000) {
                 if (lang == "en") {
                   if (media_url.includes("video_thumb") != true) {
