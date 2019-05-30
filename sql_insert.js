@@ -22,7 +22,7 @@ function db_insert(T, con) {
     var top_trends = []
     for (i=0;i<data[0].trends.length;i++) {
       volume = data[0].trends[i].tweet_volume
-      if (volume > 10000) {
+      if (volume > 1000) {
         top_trends.push(data[0].trends[i].name)
       }
     }
@@ -51,7 +51,7 @@ function db_insert(T, con) {
               time = data.statuses[i].created_at
               retweets = data.statuses[i].retweet_count
               favs = data.statuses[i].favorite_count
-              if (retweets > 5000 || favs > 5000) {
+              if (retweets > 2500 || favs > 5000) {
                 if (lang == "en") {
                   if (media_url.includes("video_thumb") != true) {
                     var query = "INSERT INTO tweets (text, time, retweets, favs, media, url) VALUES (?, ?, ?, ?, ?, ?)"
