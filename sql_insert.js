@@ -28,9 +28,9 @@ function db_insert(T, con) {
     }
     console.log(top_trends);
     top_trends.forEach(function(element) {
-      T.get('search/tweets', {q: element, count: 20}, function (err,data,response){
+      T.get('search/tweets', {q: element, count: 100}, function (err,data,response){
        if (data) {
-          for (var i = 0; i < 20; i++) {
+          for (var i = 0; i < 100; i++) {
             if (data.statuses[i]) {
               if (typeof data.statuses[i].entities.media !== "undefined") {
                 console.log(data.statuses[i].entities.media)
