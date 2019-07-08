@@ -20,9 +20,9 @@ function db_insert(T, con) {
   T.get('trends/place', {id: 23424977}, function (err, data, response){
     var top_trends = []
     for (i=0;i<data[0].trends.length;i++) {
-      volume = data[0].trends[i].tweet_volume
+      var volume = data[0].trends[i].tweet_volume;
       if (volume > 1000) {
-        top_trends.push(data[0].trends[i].name)
+        top_trends.push(data[0].trends[i].name);
       }
     }
     console.log(top_trends);
@@ -30,7 +30,7 @@ function db_insert(T, con) {
     top_trends.forEach(function(element, i = 0) {
       T.get('search/tweets', {q: element, count: 100}, function (err,data,response){
        if (data) {
-         var tweets
+         var tweets;
          tweets = data.statuses ? data.statuses : "empty";
          //console.log(tweets[0]);
          var length = tweets.length;
@@ -44,13 +44,13 @@ function db_insert(T, con) {
             text = text.substring(text.indexOf(":")+1);
             var time = tweet.created_at;
             if (typeof tweet.retweeted_status !== 'undefined' && typeof tweet.entities.media !== 'undefined'){
-              var media_url = tweet.entities.media[0].url;
-              var url = tweet.entities.media[0].media_url_https;
+              var url = tweet.entities.media[0].url;
+              var media_url = tweet.entities.media[0].media_url_https;
               var retweets = tweet.retweeted_status.retweet_count;
               var favs = tweet.retweeted_status.favorite_count;
               if (retweets > 2500 || favs > 5000) {
                 if (lang == "en") {
-                  if (media_url.includes("video_thumb") != true) {
+                  if (media_url.includes("video_thumb") !== true) {
                     var query = "INSERT INTO tweets (text, time, retweets, favs, media, url) VALUES (?, ?, ?, ?, ?, ?)";
                     var values = [text, time, retweets, favs, media_url, url];
                     con.query(query, values, function(err, rows, fields) {
