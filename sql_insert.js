@@ -12,8 +12,7 @@ var T = new Twit({
     consumer_secret:      process.env.CONSUMER_SECRET,
     access_token:         process.env.ACCESS_TOKEN,
     access_token_secret:  process.env.ACCESS_TOKEN_SECRET,
-})
-
+});
 
 
 db_insert(T, con);
@@ -27,41 +26,33 @@ function db_insert(T, con) {
       }
     }
     console.log(top_trends);
-    top_trends.forEach(function(element) {
+    var i;
+    top_trends.forEach(function(element, i = 0) {
       T.get('search/tweets', {q: element, count: 100}, function (err,data,response){
        if (data) {
-         var length = data.statuses.length
-          for (var i = 0; i < length; i++) {
-            if (data.statuses[i]) {
-              if (typeof data.statuses[i].entities.media !== "undefined") {
-                console.log(data.statuses[i].entities.media)
-                if (typeof data.statuses[i].entities.media[0].media_url != "undefined") {
-                  url = data.statuses[i].entities.media[0].url
-                  media_url = data.statuses[i].entities.media[0].media_url_https
-                  console.log(media_url)
-                  console.log(url)
-                } else {
-                  console.log("In Else");
-                  media_url = "NULL"
-                  url = "NULL"
-                }
-              }
-              var lang = data.statuses[i].lang
-              var text = data.statuses[i].text
-              text = text.substring(text.indexOf(":")+1)
-              var time = data.statuses[i].created_at
-              if (data.statuses[i].retweeted_status) {
-                var retweets = data.statuses[i].retweeted_status.retweet_count
-                var favs = data.statuses[i].retweeted_status.favorite_count
-              } else {
-                var retweets = 0
-                var favs = 0
-              }
+         var tweets
+         tweets = data.statuses ? data.statuses : "empty";
+         //console.log(tweets[0]);
+         var length = tweets.length;
+         var url;
+         var media;
+         //console.log(length);
+         tweets.forEach(tweet => {
+           if (tweet) {
+            const lang = tweet.lang;
+            var text = tweet.text;
+            text = text.substring(text.indexOf(":")+1);
+            var time = tweet.created_at;
+            if (typeof tweet.retweeted_status !== 'undefined' && typeof tweet.entities.media !== 'undefined'){
+              var media_url = tweet.entities.media[0].url;
+              var url = tweet.entities.media[0].media_url_https;
+              var retweets = tweet.retweeted_status.retweet_count;
+              var favs = tweet.retweeted_status.favorite_count;
               if (retweets > 2500 || favs > 5000) {
                 if (lang == "en") {
                   if (media_url.includes("video_thumb") != true) {
-                    var query = "INSERT INTO tweets (text, time, retweets, favs, media, url) VALUES (?, ?, ?, ?, ?, ?)"
-                    var values = [text, time, retweets, favs, media_url, url]
+                    var query = "INSERT INTO tweets (text, time, retweets, favs, media, url) VALUES (?, ?, ?, ?, ?, ?)";
+                    var values = [text, time, retweets, favs, media_url, url];
                     con.query(query, values, function(err, rows, fields) {
                       console.log(err);
                     });
@@ -69,10 +60,9 @@ function db_insert(T, con) {
                   }
                 }
               }
-              console.log(retweets)
-              console.log(favs);
             }
-          }
+           }
+         });
         }
       })
     })
