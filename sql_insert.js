@@ -46,7 +46,7 @@ function db_insert(T, con) {
               var retweets = tweet.retweeted_status.retweet_count;
               var favs = tweet.retweeted_status.favorite_count;
               console.log([retweets, favs])
-              if (retweets > 200 || favs > 500) {
+              if (retweets > 500 || favs > 1500) {
                 if (lang == "en") {
                   if (media_url.includes("video_thumb") !== true) {
                     var query = "INSERT IGNORE INTO tweets (text, time, retweets, favs, media, url) VALUES (?, ?, ?, ?, ?, ?);";
