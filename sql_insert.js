@@ -26,17 +26,14 @@ function db_insert(T, con) {
       }
     }
     console.log(top_trends);
-    var i;
-    top_trends.forEach(function(element, i = 0) {
-      T.get('search/tweets', {q: element, count: 100}, function (err,data,response){
+    top_trends.forEach(function(element) {
+      T.get('search/tweets', {q: element, count: 1000}, function (err,data,response){
        if (data) {
          var tweets;
-         tweets = data.statuses ? data.statuses : "empty";
-         //console.log(tweets[0]);
+         tweets = data.statuses ? data.statuses : ["empty"];
          var length = tweets.length;
          var url;
          var media;
-         //console.log(length);
          tweets.forEach(tweet => {
            if (tweet) {
             const lang = tweet.lang;
@@ -48,15 +45,19 @@ function db_insert(T, con) {
               var media_url = tweet.entities.media[0].media_url_https;
               var retweets = tweet.retweeted_status.retweet_count;
               var favs = tweet.retweeted_status.favorite_count;
-              if (retweets > 2500 || favs > 5000) {
+              console.log([retweets, favs])
+              if (retweets > 200 || favs > 500) {
                 if (lang == "en") {
                   if (media_url.includes("video_thumb") !== true) {
-                    var query = "INSERT INTO tweets (text, time, retweets, favs, media, url) VALUES (?, ?, ?, ?, ?, ?)";
+                    var query = "INSERT IGNORE INTO tweets (text, time, retweets, favs, media, url) VALUES (?, ?, ?, ?, ?, ?);";
                     var values = [text, time, retweets, favs, media_url, url];
                     con.query(query, values, function(err, rows, fields) {
-                      console.log(err);
-                    });
-                    console.log("Insert Complete");
+                      if (err) {
+                        console.log(err);
+                      } else {
+                        console.log("Insert Complete: " + + values);
+                      }
+                    }); 
                   }
                 }
               }
