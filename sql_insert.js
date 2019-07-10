@@ -1,20 +1,18 @@
 'use strict';
 var mysql = require('mysql');
-
+var con = mysql.createConnection({
+  host: process.env.HOST,
+  user: process.env.USER,
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE
+});
 
 var Twit = require('twit')
-
 var T = new Twit({
-  consumer_key:         'f7kgByrtb2nqtWUSgRAaU7Kur',
-  consumer_secret:      'tu9QzGb2C1xwloWIDFqA1Dh3toFO4BFc0qOOO8q6tMfAdY7sdP',
-  access_token:         '1067520612820602882-2sCHP6qzJcKjhP1ANSAqw9FgwDytyP',
-  access_token_secret:  'pOhTfQ75M16yh17bZqw1gglvEb8MArK67Ke8QM0OlCErJ',
-})
-var con = mysql.createConnection({
-host: 'us-cdbr-iron-east-03.cleardb.net',
-user: 'b0943139dae1e6',
-password: '0f1af6bb',
-database: 'heroku_121b5e7e1db5572'
+    consumer_key:         process.env.CONSUMER_KEY,
+    consumer_secret:      process.env.CONSUMER_SECRET,
+    access_token:         process.env.ACCESS_TOKEN,
+    access_token_secret:  process.env.ACCESS_TOKEN_SECRET,
 });
 
 
